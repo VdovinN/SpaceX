@@ -41,6 +41,8 @@ dependencies {
     implementation "com.jakewharton.rxbinding2:rxbinding:$rootProject.rxBindingLibraryVersion"
     implementation "com.google.dagger:dagger:$rootProject.daggerLibraryVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.daggerLibraryVersion"
+    implementation "com.google.dagger:dagger-android-support:$rootProject.daggerLibraryVersion"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.daggerLibraryVersion"
     implementation "com.squareup.picasso:picasso:$rootProject.picassoLibraryVersion"
 
     testImplementation "junit:junit:$rootProject.junitLibraryVersion"
