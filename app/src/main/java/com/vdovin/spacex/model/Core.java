@@ -14,7 +14,7 @@ public class Core {
     private Integer flight;
     @SerializedName("block")
     @Expose
-    private Object block;
+    private Integer block;
     @SerializedName("reused")
     @Expose
     private Boolean reused;
@@ -23,10 +23,10 @@ public class Core {
     private Boolean landSuccess;
     @SerializedName("landing_type")
     @Expose
-    private Object landingType;
+    private String landingType;
     @SerializedName("landing_vehicle")
     @Expose
-    private Object landingVehicle;
+    private String landingVehicle;
 
     public String getCoreSerial() {
         return coreSerial;
@@ -44,11 +44,11 @@ public class Core {
         this.flight = flight;
     }
 
-    public Object getBlock() {
+    public Integer getBlock() {
         return block;
     }
 
-    public void setBlock(Object block) {
+    public void setBlock(Integer block) {
         this.block = block;
     }
 
@@ -68,19 +68,19 @@ public class Core {
         this.landSuccess = landSuccess;
     }
 
-    public Object getLandingType() {
+    public String getLandingType() {
         return landingType;
     }
 
-    public void setLandingType(Object landingType) {
+    public void setLandingType(String landingType) {
         this.landingType = landingType;
     }
 
-    public Object getLandingVehicle() {
+    public String getLandingVehicle() {
         return landingVehicle;
     }
 
-    public void setLandingVehicle(Object landingVehicle) {
+    public void setLandingVehicle(String landingVehicle) {
         this.landingVehicle = landingVehicle;
     }
 

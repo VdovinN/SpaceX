@@ -1,9 +1,10 @@
 
 package com.vdovin.spacex.model;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class Payload {
 
@@ -21,10 +22,10 @@ public class Payload {
     private String payloadType;
     @SerializedName("payload_mass_kg")
     @Expose
-    private Integer payloadMassKg;
+    private Double payloadMassKg;
     @SerializedName("payload_mass_lbs")
     @Expose
-    private Integer payloadMassLbs;
+    private Double payloadMassLbs;
     @SerializedName("orbit")
     @Expose
     private String orbit;
@@ -64,19 +65,19 @@ public class Payload {
         this.payloadType = payloadType;
     }
 
-    public Integer getPayloadMassKg() {
+    public Double getPayloadMassKg() {
         return payloadMassKg;
     }
 
-    public void setPayloadMassKg(Integer payloadMassKg) {
+    public void setPayloadMassKg(Double payloadMassKg) {
         this.payloadMassKg = payloadMassKg;
     }
 
-    public Integer getPayloadMassLbs() {
+    public Double getPayloadMassLbs() {
         return payloadMassLbs;
     }
 
-    public void setPayloadMassLbs(Integer payloadMassLbs) {
+    public void setPayloadMassLbs(Double payloadMassLbs) {
         this.payloadMassLbs = payloadMassLbs;
     }
 

@@ -14,28 +14,28 @@ public class OrbitParams {
     private String regime;
     @SerializedName("longitude")
     @Expose
-    private Object longitude;
+    private Double longitude;
     @SerializedName("semi_major_axis_km")
     @Expose
-    private Object semiMajorAxisKm;
+    private Double semiMajorAxisKm;
     @SerializedName("eccentricity")
     @Expose
-    private Object eccentricity;
+    private Double eccentricity;
     @SerializedName("periapsis_km")
     @Expose
-    private Integer periapsisKm;
+    private Double periapsisKm;
     @SerializedName("apoapsis_km")
     @Expose
-    private Integer apoapsisKm;
+    private Double apoapsisKm;
     @SerializedName("inclination_deg")
     @Expose
-    private Integer inclinationDeg;
+    private Double inclinationDeg;
     @SerializedName("period_min")
     @Expose
-    private Object periodMin;
+    private Double periodMin;
     @SerializedName("lifespan_years")
     @Expose
-    private Object lifespanYears;
+    private Integer lifespanYears;
 
     public String getReferenceSystem() {
         return referenceSystem;
@@ -53,67 +53,67 @@ public class OrbitParams {
         this.regime = regime;
     }
 
-    public Object getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Object longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
-    public Object getSemiMajorAxisKm() {
+    public Double getSemiMajorAxisKm() {
         return semiMajorAxisKm;
     }
 
-    public void setSemiMajorAxisKm(Object semiMajorAxisKm) {
+    public void setSemiMajorAxisKm(Double semiMajorAxisKm) {
         this.semiMajorAxisKm = semiMajorAxisKm;
     }
 
-    public Object getEccentricity() {
+    public Double getEccentricity() {
         return eccentricity;
     }
 
-    public void setEccentricity(Object eccentricity) {
+    public void setEccentricity(Double eccentricity) {
         this.eccentricity = eccentricity;
     }
 
-    public Integer getPeriapsisKm() {
+    public Double getPeriapsisKm() {
         return periapsisKm;
     }
 
-    public void setPeriapsisKm(Integer periapsisKm) {
+    public void setPeriapsisKm(Double periapsisKm) {
         this.periapsisKm = periapsisKm;
     }
 
-    public Integer getApoapsisKm() {
+    public Double getApoapsisKm() {
         return apoapsisKm;
     }
 
-    public void setApoapsisKm(Integer apoapsisKm) {
+    public void setApoapsisKm(Double apoapsisKm) {
         this.apoapsisKm = apoapsisKm;
     }
 
-    public Integer getInclinationDeg() {
+    public Double getInclinationDeg() {
         return inclinationDeg;
     }
 
-    public void setInclinationDeg(Integer inclinationDeg) {
+    public void setInclinationDeg(Double inclinationDeg) {
         this.inclinationDeg = inclinationDeg;
     }
 
-    public Object getPeriodMin() {
+    public Double getPeriodMin() {
         return periodMin;
     }
 
-    public void setPeriodMin(Object periodMin) {
+    public void setPeriodMin(Double periodMin) {
         this.periodMin = periodMin;
     }
 
-    public Object getLifespanYears() {
+    public Integer getLifespanYears() {
         return lifespanYears;
     }
 
-    public void setLifespanYears(Object lifespanYears) {
+    public void setLifespanYears(Integer lifespanYears) {
         this.lifespanYears = lifespanYears;
     }
 

@@ -8,13 +8,13 @@ public class Telemetry {
 
     @SerializedName("flight_club")
     @Expose
-    private Object flightClub;
+    private String flightClub;
 
-    public Object getFlightClub() {
+    public String getFlightClub() {
         return flightClub;
     }
 
-    public void setFlightClub(Object flightClub) {
+    public void setFlightClub(String flightClub) {
         this.flightClub = flightClub;
     }
 
