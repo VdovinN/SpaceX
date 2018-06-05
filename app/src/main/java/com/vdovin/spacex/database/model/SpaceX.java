@@ -1,6 +1,7 @@
 package com.vdovin.spacex.database.model;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 @Entity(tableName = "space_x")
@@ -20,6 +21,20 @@ public class SpaceX {
     private String wikipediaLink;
 
     private String youtubeLink;
+
+    @Ignore
+    public SpaceX() {
+    }
+
+    public SpaceX(Long flightNumber, String missionName, String launchDate, String rocketName, Double payloadMass, String wikipediaLink, String youtubeLink) {
+        this.flightNumber = flightNumber;
+        this.missionName = missionName;
+        this.launchDate = launchDate;
+        this.rocketName = rocketName;
+        this.payloadMass = payloadMass;
+        this.wikipediaLink = wikipediaLink;
+        this.youtubeLink = youtubeLink;
+    }
 
     public Long getFlightNumber() {
         return flightNumber;

@@ -19,4 +19,7 @@ public interface SpaceXDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(SpaceX... spaceX);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insert(List<SpaceX> spaceXList);
 }
