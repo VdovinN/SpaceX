@@ -13,12 +13,7 @@ import com.vdovin.spacex.R;
 public class LaunchesFragment extends Fragment {
 
     public static LaunchesFragment newInstance() {
-
-        Bundle args = new Bundle();
-
-        LaunchesFragment fragment = new LaunchesFragment();
-        fragment.setArguments(args);
-        return fragment;
+        return new LaunchesFragment();
     }
 
     @Nullable
