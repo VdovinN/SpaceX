@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion rootProject.compileSdkVersion
     defaultConfig {
         applicationId "com.vdovin.spacex"
-        minSdkVersion 15
-        targetSdkVersion 27
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -20,9 +20,24 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:exifinterface:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
+    implementation "com.jakewharton:butterknife:$rootProject.butterKnifeLibraryVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterKnifeCompilerLibraryVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitLibraryVersion"
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitLibraryVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.loggingInterceptorLibraryVersion"
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.reactiveXLibraryVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.reactiveXAndroidLibraryVersion"
+    implementation "com.jakewharton.rxbinding2:rxbinding:$rootProject.rxBindingLibraryVersion"
+    implementation "com.google.dagger:dagger:$rootProject.daggerLibraryVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.daggerLibraryVersion"
+    implementation "com.squareup.picasso:picasso:$rootProject.picassoLibraryVersion"
+
+    testImplementation "junit:junit:$rootProject.junitLibraryVersion"
+    androidTestImplementation "com.android.support.test:runner:$rootProject.testRunnerLibraryVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.espressoLibraryVersion"
+
+
 }
