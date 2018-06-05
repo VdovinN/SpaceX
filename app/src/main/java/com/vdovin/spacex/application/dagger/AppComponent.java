@@ -11,6 +11,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
         AndroidSupportInjectionModule.class,
         AppModule.class,
         NetworkModule.class,
+        DatabaseModule.class,
         BuildersModule.class
 })
 public interface AppComponent {

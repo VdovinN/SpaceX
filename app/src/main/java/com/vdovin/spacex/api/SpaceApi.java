@@ -1,6 +1,6 @@
 package com.vdovin.spacex.api;
 
-import com.vdovin.spacex.model.Space;
+import com.vdovin.spacex.api.model.Space;
 
 import java.util.List;
 

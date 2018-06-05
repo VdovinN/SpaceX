@@ -43,6 +43,9 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.daggerLibraryVersion"
     implementation "com.google.dagger:dagger-android-support:$rootProject.daggerLibraryVersion"
     annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.daggerLibraryVersion"
+    implementation "android.arch.persistence.room:runtime:$project.roomLibraryVersion"
+    implementation "android.arch.persistence.room:rxjava2:$project.roomLibraryVersion"
+    annotationProcessor "android.arch.persistence.room:compiler:$project.roomLibraryVersion"
     implementation "com.squareup.picasso:picasso:$rootProject.picassoLibraryVersion"
 
     testImplementation "junit:junit:$rootProject.junitLibraryVersion"

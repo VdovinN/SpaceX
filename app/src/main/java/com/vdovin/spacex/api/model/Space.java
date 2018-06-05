@@ -1,5 +1,5 @@
 
-package com.vdovin.spacex.model;
+package com.vdovin.spacex.api.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -8,7 +8,7 @@ public class Space {
 
     @SerializedName("flight_number")
     @Expose
-    private Integer flightNumber;
+    private Long flightNumber;
     @SerializedName("mission_name")
     @Expose
     private String missionName;
@@ -17,7 +17,7 @@ public class Space {
     private String launchYear;
     @SerializedName("launch_date_unix")
     @Expose
-    private Integer launchDateUnix;
+    private Long launchDateUnix;
     @SerializedName("launch_date_utc")
     @Expose
     private String launchDateUtc;
@@ -46,11 +46,11 @@ public class Space {
     @Expose
     private String details;
 
-    public Integer getFlightNumber() {
+    public Long getFlightNumber() {
         return flightNumber;
     }
 
-    public void setFlightNumber(Integer flightNumber) {
+    public void setFlightNumber(Long flightNumber) {
         this.flightNumber = flightNumber;
     }
 
@@ -70,11 +70,11 @@ public class Space {
         this.launchYear = launchYear;
     }
 
-    public Integer getLaunchDateUnix() {
+    public Long getLaunchDateUnix() {
         return launchDateUnix;
     }
 
-    public void setLaunchDateUnix(Integer launchDateUnix) {
+    public void setLaunchDateUnix(Long launchDateUnix) {
         this.launchDateUnix = launchDateUnix;
     }
 

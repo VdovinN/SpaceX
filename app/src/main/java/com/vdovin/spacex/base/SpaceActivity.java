@@ -1,11 +1,12 @@
-package com.vdovin.spacex;
+package com.vdovin.spacex.base;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
+import com.vdovin.spacex.R;
 import com.vdovin.spacex.api.SpaceApi;
-import com.vdovin.spacex.model.Space;
+import com.vdovin.spacex.api.model.Space;
 
 import java.util.List;
 
