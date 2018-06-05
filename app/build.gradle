@@ -34,6 +34,7 @@ dependencies {
     implementation "com.google.dagger:dagger:$rootProject.daggerLibraryVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.daggerLibraryVersion"
     implementation "com.squareup.picasso:picasso:$rootProject.picassoLibraryVersion"
+    implementation "com.google.code.gson:gson:$rootProject.gsonLibraryVersion"
 
     testImplementation "junit:junit:$rootProject.junitLibraryVersion"
     androidTestImplementation "com.android.support.test:runner:$rootProject.testRunnerLibraryVersion"

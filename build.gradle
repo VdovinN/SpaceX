@@ -41,6 +41,7 @@ ext{
     rxBindingLibraryVersion = '2.1.1'
     daggerLibraryVersion = '2.16'
     picassoLibraryVersion = '2.71828'
+    gsonLibraryVersion = '2.8.5'
 
 }
 
