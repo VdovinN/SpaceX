@@ -20,6 +20,7 @@ public class LaunchesPresenter extends BasePresenter<LaunchesView> {
     protected void onLoad() {
         super.onLoad();
         disposables.add(loadAllLaunches());
+        disposables.add(launchClicked());
     }
 
     private Disposable loadAllLaunches() {
@@ -27,6 +28,10 @@ public class LaunchesPresenter extends BasePresenter<LaunchesView> {
                 .subscribeOn(rxSchedulers.io())
                 .observeOn(rxSchedulers.androidUI())
                 .subscribe(launches -> getView().displayLaunches(launches));
+    }
+
+    private Disposable launchClicked() {
+        return getView().launchClicked().subscribe(spaceX -> getView().openDetails(spaceX));
     }
 
 }

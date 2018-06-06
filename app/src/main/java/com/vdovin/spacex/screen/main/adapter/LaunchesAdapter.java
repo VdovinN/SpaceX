@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jakewharton.rxbinding2.view.RxView;
 import com.squareup.picasso.Picasso;
 import com.vdovin.spacex.R;
 import com.vdovin.spacex.database.model.SpaceX;
@@ -19,21 +20,29 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observable;
+import io.reactivex.subjects.PublishSubject;
 
 public class LaunchesAdapter extends RecyclerView.Adapter<LaunchesAdapter.ViewHolder> {
 
     private Context context;
     private List<SpaceX> spaceList;
 
+    PublishSubject<SpaceX> itemClicked = PublishSubject.create();
+
     public LaunchesAdapter(Context context, List<SpaceX> spaceList) {
         this.context = context;
         this.spaceList = spaceList;
     }
 
+    public Observable<SpaceX> getItemClickedObservable() {
+        return itemClicked;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.launch_item_layout, parent, false));
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.launch_item_layout, parent, false), parent);
     }
 
     @Override
@@ -61,8 +70,11 @@ public class LaunchesAdapter extends RecyclerView.Adapter<LaunchesAdapter.ViewHo
         @BindView(R.id.launch_image_view)
         ImageView launchImageView;
 
-        public ViewHolder(View itemView) {
+        private ViewGroup parent;
+
+        public ViewHolder(View itemView, ViewGroup parent) {
             super(itemView);
+            this.parent = parent;
             ButterKnife.bind(this, itemView);
         }
 
@@ -72,6 +84,10 @@ public class LaunchesAdapter extends RecyclerView.Adapter<LaunchesAdapter.ViewHo
 
             String path = Constants.YOUTUBE_IMG_BASE_URL + spaceX.getYoutubeVideoId() + Constants.YOUTUBE_IMG_END_URL;
             Picasso.get().load(path).into(launchImageView);
+            RxView.clicks(itemView)
+                    .takeUntil(RxView.detaches(parent))
+                    .map(object -> spaceX)
+                    .subscribe(itemClicked);
         }
     }
 }

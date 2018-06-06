@@ -4,13 +4,17 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "space_x")
-public class SpaceX {
+public class SpaceX implements Serializable {
 
     @PrimaryKey
     private Long flightNumber;
 
     private String missionName;
+
+    private String details;
 
     private String launchDate;
 
@@ -28,9 +32,10 @@ public class SpaceX {
     public SpaceX() {
     }
 
-    public SpaceX(Long flightNumber, String missionName, String launchDate, String rocketName, Double payloadMass, String wikipediaLink, String youtubeLink, String youtubeVideoId) {
+    public SpaceX(Long flightNumber, String missionName, String details, String launchDate, String rocketName, Double payloadMass, String wikipediaLink, String youtubeLink, String youtubeVideoId) {
         this.flightNumber = flightNumber;
         this.missionName = missionName;
+        this.details = details;
         this.launchDate = launchDate;
         this.rocketName = rocketName;
         this.payloadMass = payloadMass;
@@ -53,6 +58,14 @@ public class SpaceX {
 
     public void setMissionName(String missionName) {
         this.missionName = missionName;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 
     public String getLaunchDate() {

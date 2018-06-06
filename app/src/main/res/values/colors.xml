@@ -4,12 +4,16 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="white">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
     <color name="generalGray">#1D1E22</color>
     <color name="generalBackground">#171A21</color>
     <color name="lightBlue">#9DD8F6</color>
     <color name="dateGrayBackground">#969696</color>
     <color name="dateGrayText">#424242</color>
     <color name="dividerColor">#21242B</color>
-    <color name="darkBlue">#2F5382</color>
+    <color name="darkBlue">#007AFF</color>
+    <color name="detailTextGrayColor">#9A9AA4</color>
+    <color name="detailDateGrayColor">#71707B</color>
 
 </resources>

@@ -72,6 +72,7 @@ public class SpaceActivity extends AppCompatActivity implements HasSupportFragme
 
                         SpaceX spaceX = new SpaceX(space.getFlightNumber(),
                                 space.getMissionName(),
+                                space.getDetails(),
                                 DateUtil.convertTimestampToFormattedDate(space.getLaunchDateUnix() * 1000),
                                 rocket.getRocketName(),
                                 rocket.getSecondStage().getPayloads().get(0).getPayloadMassKg(),
@@ -107,6 +108,7 @@ public class SpaceActivity extends AppCompatActivity implements HasSupportFragme
                 .add(R.id.main_container, LaunchesFragment.newInstance())
                 .commit();
     }
+
 
     @Override
     public AndroidInjector<Fragment> supportFragmentInjector() {
