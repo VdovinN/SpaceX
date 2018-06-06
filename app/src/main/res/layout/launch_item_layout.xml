@@ -3,43 +3,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="200dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/generalBackground">
 
-    <ImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/launch_image_view"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_margin="8dp"
-        android:src="@color/colorPrimaryDark" />
-
-    <TextView
-        android:id="@+id/launch_date_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/launch_image_view"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@color/dateGrayText"
-        android:padding="4dp"
-        android:textColor="@color/dateGrayBackground"
-        tools:text="TUESDAY 18, 2018" />
-
-    <TextView
-        android:id="@+id/launch_name_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/launch_image_view"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_toLeftOf="@id/launch_date_text_view"
-        android:layout_toStartOf="@id/launch_date_text_view"
-        android:padding="4dp"
-        android:textColor="@color/lightBlue"
-        tools:text="Iridium NEXT Mission 6" />
+        android:layout_marginTop="8dp"
+        android:scaleType="centerCrop"
+        app:riv_corner_radius="8dip" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/launch_image_view">
+
+        <TextView
+            android:id="@+id/launch_date_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@color/dateGrayText"
+            android:paddingEnd="4dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingStart="4dp"
+            android:textAllCaps="true"
+            android:textColor="@color/dateGrayBackground"
+            android:textSize="@dimen/launches_date_text_size"
+            tools:text="TUESDAY 18, 2018" />
+
+        <TextView
+            android:id="@+id/launch_name_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_toLeftOf="@id/launch_date_text_view"
+            android:layout_toStartOf="@id/launch_date_text_view"
+            android:padding="4dp"
+            android:textColor="@color/lightBlue"
+            android:textSize="@dimen/launch_name_text_size"
+            tools:text="Iridium NEXT Mission 6" />
+
+    </RelativeLayout>
+
 
     <View
         android:layout_width="match_parent"

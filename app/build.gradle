@@ -47,6 +47,7 @@ dependencies {
     implementation "android.arch.persistence.room:rxjava2:$project.roomLibraryVersion"
     annotationProcessor "android.arch.persistence.room:compiler:$project.roomLibraryVersion"
     implementation "com.squareup.picasso:picasso:$rootProject.picassoLibraryVersion"
+    implementation "com.makeramen:roundedimageview:$rootProject.roundedImageViewLibraryVersion"
 
     testImplementation "junit:junit:$rootProject.junitLibraryVersion"
     androidTestImplementation "com.android.support.test:runner:$rootProject.testRunnerLibraryVersion"

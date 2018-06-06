@@ -9,9 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.vdovin.spacex.R;
-import com.vdovin.spacex.api.model.Space;
-import com.vdovin.spacex.util.DateUtil;
+import com.vdovin.spacex.database.model.SpaceX;
+import com.vdovin.spacex.util.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +23,9 @@ import butterknife.ButterKnife;
 public class LaunchesAdapter extends RecyclerView.Adapter<LaunchesAdapter.ViewHolder> {
 
     private Context context;
-    private List<Space> spaceList;
+    private List<SpaceX> spaceList;
 
-    public LaunchesAdapter(Context context, List<Space> spaceList) {
+    public LaunchesAdapter(Context context, List<SpaceX> spaceList) {
         this.context = context;
         this.spaceList = spaceList;
     }
@@ -37,7 +38,7 @@ public class LaunchesAdapter extends RecyclerView.Adapter<LaunchesAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Space space = spaceList.get(position);
+        SpaceX space = spaceList.get(position);
         holder.bind(space);
     }
 
@@ -46,7 +47,7 @@ public class LaunchesAdapter extends RecyclerView.Adapter<LaunchesAdapter.ViewHo
         return spaceList.size();
     }
 
-    public void swap(List<Space> spaces) {
+    public void swap(List<SpaceX> spaces) {
         spaceList = new ArrayList<>(spaces);
         notifyDataSetChanged();
     }
@@ -65,10 +66,12 @@ public class LaunchesAdapter extends RecyclerView.Adapter<LaunchesAdapter.ViewHo
             ButterKnife.bind(this, itemView);
         }
 
-        public void bind(Space space) {
-            launchNameTextView.setText(space.getMissionName());
-            launchDateTextView.setText(DateUtil.convertTimestampToFormattedDate(space.getLaunchDateUnix()));
+        public void bind(SpaceX spaceX) {
+            launchNameTextView.setText(spaceX.getMissionName());
+            launchDateTextView.setText(spaceX.getLaunchDate());
 
+            String path = Constants.YOUTUBE_IMG_BASE_URL + spaceX.getYoutubeVideoId() + Constants.YOUTUBE_IMG_END_URL;
+            Picasso.get().load(path).into(launchImageView);
         }
     }
 }

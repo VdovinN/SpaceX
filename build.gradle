@@ -17,6 +17,7 @@ buildscript {
 
 allprojects {
     repositories {
+        mavenCentral()
         google()
         jcenter()
     }
@@ -43,6 +44,7 @@ ext{
     picassoLibraryVersion = '2.71828'
     gsonLibraryVersion = '2.8.5'
     roomLibraryVersion = '1.1.0'
+    roundedImageViewLibraryVersion = '2.3.0'
 
 }
 

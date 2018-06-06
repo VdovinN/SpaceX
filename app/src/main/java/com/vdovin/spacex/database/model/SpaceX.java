@@ -22,11 +22,13 @@ public class SpaceX {
 
     private String youtubeLink;
 
+    private String youtubeVideoId;
+
     @Ignore
     public SpaceX() {
     }
 
-    public SpaceX(Long flightNumber, String missionName, String launchDate, String rocketName, Double payloadMass, String wikipediaLink, String youtubeLink) {
+    public SpaceX(Long flightNumber, String missionName, String launchDate, String rocketName, Double payloadMass, String wikipediaLink, String youtubeLink, String youtubeVideoId) {
         this.flightNumber = flightNumber;
         this.missionName = missionName;
         this.launchDate = launchDate;
@@ -34,6 +36,7 @@ public class SpaceX {
         this.payloadMass = payloadMass;
         this.wikipediaLink = wikipediaLink;
         this.youtubeLink = youtubeLink;
+        this.youtubeVideoId = youtubeVideoId;
     }
 
     public Long getFlightNumber() {
@@ -90,5 +93,13 @@ public class SpaceX {
 
     public void setYoutubeLink(String youtubeLink) {
         this.youtubeLink = youtubeLink;
+    }
+
+    public String getYoutubeVideoId() {
+        return youtubeVideoId;
+    }
+
+    public void setYoutubeVideoId(String youtubeVideoId) {
+        this.youtubeVideoId = youtubeVideoId;
     }
 }
