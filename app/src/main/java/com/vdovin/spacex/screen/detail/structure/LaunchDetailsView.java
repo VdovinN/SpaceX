@@ -10,6 +10,12 @@ public interface LaunchDetailsView extends BaseView {
 
     void openWiki();
 
+    void changeLaunchImageVisibility(boolean isVisible);
+
+    void playVideo();
+
+    Observable<Object> launchImageClicked();
+
     Observable<Object> backButtonClicked();
 
     Observable<Object> linkClicked();

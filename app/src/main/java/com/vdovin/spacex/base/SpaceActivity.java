@@ -77,7 +77,6 @@ public class SpaceActivity extends AppCompatActivity implements HasSupportFragme
                                 rocket.getRocketName(),
                                 rocket.getSecondStage().getPayloads().get(0).getPayloadMassKg(),
                                 links.getWikipedia(),
-                                links.getVideoLink(),
                                 youtubeVideoId);
 
 

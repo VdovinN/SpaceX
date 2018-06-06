@@ -20,6 +20,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp">
 
+                <FrameLayout
+                    android:id="@+id/youtube_fragment"
+                    android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
                 <ImageView
                     android:id="@+id/launch_image_view"
                     android:layout_width="match_parent"

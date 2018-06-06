@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.squareup.picasso.Picasso;
 import com.vdovin.spacex.R;
@@ -52,9 +56,14 @@ public class LaunchDetailsFragment extends Fragment implements LaunchDetailsView
     @BindView(R.id.launch_wiki_link_text_view)
     TextView launchWikiLinkTextView;
 
+
     private SpaceX spaceX;
 
     private String wikiLink;
+
+    private String youtubeId;
+
+    private YouTubePlayerSupportFragment youTubePlayerFragment;
 
     public static LaunchDetailsFragment newInstance(SpaceX spaceX) {
 
@@ -77,6 +86,10 @@ public class LaunchDetailsFragment extends Fragment implements LaunchDetailsView
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
+        youTubePlayerFragment = YouTubePlayerSupportFragment.newInstance();
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.add(R.id.youtube_fragment, youTubePlayerFragment).commit();
+
         if (getArguments() != null) {
             spaceX = (SpaceX) getArguments().getSerializable(Constants.SPACE_X_KEY);
         }
@@ -95,8 +108,11 @@ public class LaunchDetailsFragment extends Fragment implements LaunchDetailsView
             }
             wikiLink = spaceX.getWikipediaLink();
 
-            String path = Constants.YOUTUBE_IMG_BASE_URL + spaceX.getYoutubeVideoId() + Constants.YOUTUBE_IMG_END_URL;
-            Picasso.get().load(path).into(launchImageView);
+            youtubeId = spaceX.getYoutubeVideoId();
+            if (youtubeId != null) {
+                String path = Constants.YOUTUBE_IMG_BASE_URL + youtubeId + Constants.YOUTUBE_IMG_END_URL;
+                Picasso.get().load(path).into(launchImageView);
+            }
         }
 
         presenter.takeView(this);
@@ -114,6 +130,35 @@ public class LaunchDetailsFragment extends Fragment implements LaunchDetailsView
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(wikiLink));
             startActivity(browserIntent);
         }
+    }
+
+    @Override
+    public void changeLaunchImageVisibility(boolean isVisible) {
+        launchImageView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void playVideo() {
+        youTubePlayerFragment.initialize(Constants.YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                if (!b) {
+                    changeLaunchImageVisibility(false);
+                    youTubePlayer.loadVideo(youtubeId);
+                    youTubePlayer.play();
+                }
+            }
+
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+
+            }
+        });
+    }
+
+    @Override
+    public Observable<Object> launchImageClicked() {
+        return RxView.clicks(launchImageView);
     }
 
     @Override

@@ -24,15 +24,13 @@ public class SpaceX implements Serializable {
 
     private String wikipediaLink;
 
-    private String youtubeLink;
-
     private String youtubeVideoId;
 
     @Ignore
     public SpaceX() {
     }
 
-    public SpaceX(Long flightNumber, String missionName, String details, String launchDate, String rocketName, Double payloadMass, String wikipediaLink, String youtubeLink, String youtubeVideoId) {
+    public SpaceX(Long flightNumber, String missionName, String details, String launchDate, String rocketName, Double payloadMass, String wikipediaLink, String youtubeVideoId) {
         this.flightNumber = flightNumber;
         this.missionName = missionName;
         this.details = details;
@@ -40,7 +38,6 @@ public class SpaceX implements Serializable {
         this.rocketName = rocketName;
         this.payloadMass = payloadMass;
         this.wikipediaLink = wikipediaLink;
-        this.youtubeLink = youtubeLink;
         this.youtubeVideoId = youtubeVideoId;
     }
 
@@ -98,14 +95,6 @@ public class SpaceX implements Serializable {
 
     public void setWikipediaLink(String wikipediaLink) {
         this.wikipediaLink = wikipediaLink;
-    }
-
-    public String getYoutubeLink() {
-        return youtubeLink;
-    }
-
-    public void setYoutubeLink(String youtubeLink) {
-        this.youtubeLink = youtubeLink;
     }
 
     public String getYoutubeVideoId() {

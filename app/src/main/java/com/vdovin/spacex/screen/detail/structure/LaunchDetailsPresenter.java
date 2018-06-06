@@ -14,6 +14,7 @@ public class LaunchDetailsPresenter extends BasePresenter<LaunchDetailsView> {
         super.onLoad();
         disposables.add(back());
         disposables.add(openLink());
+        disposables.add(play());
     }
 
     private Disposable back() {
@@ -24,5 +25,8 @@ public class LaunchDetailsPresenter extends BasePresenter<LaunchDetailsView> {
         return getView().linkClicked().subscribe(o -> getView().openWiki());
     }
 
+    private Disposable play() {
+        return getView().launchImageClicked().subscribe(o -> getView().playVideo());
+    }
 
 }
