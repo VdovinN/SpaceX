@@ -72,7 +72,7 @@ public class LaunchesFragment extends Fragment implements LaunchesView {
         if (manager != null) {
             manager.beginTransaction()
                     .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
-                    .replace(R.id.main_container, LaunchDetailsFragment.newInstance(spaceX))
+                    .replace(R.id.main_container, LaunchDetailsFragment.newInstance(spaceX), LaunchDetailsFragment.class.getName())
                     .addToBackStack(null)
                     .commit();
         }

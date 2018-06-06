@@ -65,6 +65,10 @@ public class LaunchDetailsFragment extends Fragment implements LaunchDetailsView
 
     private YouTubePlayerSupportFragment youTubePlayerFragment;
 
+    private YouTubePlayer player;
+
+    private boolean fullScreen;
+
     public static LaunchDetailsFragment newInstance(SpaceX spaceX) {
 
         Bundle args = new Bundle();
@@ -143,9 +147,11 @@ public class LaunchDetailsFragment extends Fragment implements LaunchDetailsView
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 if (!b) {
+                    player = youTubePlayer;
                     changeLaunchImageVisibility(false);
-                    youTubePlayer.loadVideo(youtubeId);
-                    youTubePlayer.play();
+                    player.loadVideo(youtubeId);
+                    player.setOnFullscreenListener(b1 -> fullScreen = b1);
+                    player.play();
                 }
             }
 
@@ -170,4 +176,15 @@ public class LaunchDetailsFragment extends Fragment implements LaunchDetailsView
     public Observable<Object> linkClicked() {
         return RxView.clicks(launchWikiLinkTextView);
     }
+
+    public boolean isFullscreen() {
+        return fullScreen;
+    }
+
+    public void exitFullScreen() {
+        if (player != null) {
+            player.setFullscreen(false);
+        }
+    }
+
 }

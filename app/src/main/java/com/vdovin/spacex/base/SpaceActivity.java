@@ -16,6 +16,7 @@ import com.vdovin.spacex.api.model.Rocket;
 import com.vdovin.spacex.api.model.Space;
 import com.vdovin.spacex.database.dao.SpaceXDao;
 import com.vdovin.spacex.database.model.SpaceX;
+import com.vdovin.spacex.screen.detail.LaunchDetailsFragment;
 import com.vdovin.spacex.screen.main.LaunchesFragment;
 import com.vdovin.spacex.util.DateUtil;
 
@@ -91,6 +92,20 @@ public class SpaceActivity extends AppCompatActivity implements HasSupportFragme
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(success -> showLaunches());
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        LaunchDetailsFragment launchDetailsFragment = (LaunchDetailsFragment) getSupportFragmentManager().findFragmentByTag(LaunchDetailsFragment.class.getName());
+        if (launchDetailsFragment != null && launchDetailsFragment.isVisible()) {
+            if (launchDetailsFragment.isFullscreen()) {
+                launchDetailsFragment.exitFullScreen();
+            } else {
+                super.onBackPressed();
+            }
+        } else {
+            super.onBackPressed();
+        }
     }
 
     private void setupStatusBarColor() {
