@@ -1,20 +1,31 @@
 package com.vdovin.spacex.screen.detail.structure;
 
 import com.vdovin.spacex.base.BasePresenter;
+import com.vdovin.spacex.database.model.SpaceX;
 
 import io.reactivex.disposables.Disposable;
 
 public class LaunchDetailsPresenter extends BasePresenter<LaunchDetailsView> {
 
+    private SpaceX spaceX;
+
+    private boolean fullScreen;
+
     public LaunchDetailsPresenter() {
+    }
+
+    public void setSpaceX(SpaceX spaceX) {
+        this.spaceX = spaceX;
     }
 
     @Override
     protected void onLoad() {
         super.onLoad();
+        getView().setupView(spaceX);
         disposables.add(back());
         disposables.add(openLink());
         disposables.add(play());
+        disposables.add(fullScreen());
     }
 
     private Disposable back() {
@@ -22,11 +33,18 @@ public class LaunchDetailsPresenter extends BasePresenter<LaunchDetailsView> {
     }
 
     private Disposable openLink() {
-        return getView().linkClicked().subscribe(o -> getView().openWiki());
+        return getView().linkClicked().subscribe(o -> getView().openWiki(spaceX.getWikipediaLink()));
     }
 
     private Disposable play() {
-        return getView().launchImageClicked().subscribe(o -> getView().playVideo());
+        return getView().launchImageClicked().flatMap(o -> getView().initializeYoutubePlayer()).subscribe(pair -> {
+            fullScreen = pair.second;
+            getView().playVideo(spaceX.getYoutubeVideoId(), pair.first, pair.second);
+        });
+    }
+
+    private Disposable fullScreen() {
+        return getView().detectFullscreen().subscribe(isFullscreen -> fullScreen = isFullscreen);
     }
 
 }

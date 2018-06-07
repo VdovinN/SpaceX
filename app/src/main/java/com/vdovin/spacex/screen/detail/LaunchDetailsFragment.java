@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,12 +57,6 @@ public class LaunchDetailsFragment extends BaseFragment implements LaunchDetails
     TextView launchWikiLinkTextView;
 
 
-    private SpaceX spaceX;
-
-    private String wikiLink;
-
-    private String youtubeId;
-
     private YouTubePlayerSupportFragment youTubePlayerFragment;
 
     private YouTubePlayer player;
@@ -87,14 +82,30 @@ public class LaunchDetailsFragment extends BaseFragment implements LaunchDetails
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
         youTubePlayerFragment = YouTubePlayerSupportFragment.newInstance();
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.add(R.id.youtube_fragment, youTubePlayerFragment).commit();
+
+        SpaceX spaceX = null;
 
         if (getArguments() != null) {
             spaceX = (SpaceX) getArguments().getSerializable(Constants.SPACE_X_KEY);
         }
 
+        presenter.setSpaceX(spaceX);
+
+        presenter.takeView(this);
+    }
+
+
+    @Override
+    public void backPressed() {
+        Objects.requireNonNull(getActivity()).onBackPressed();
+    }
+
+    @Override
+    public void setupView(SpaceX spaceX) {
         if (spaceX != null) {
             launchTitleTextView.setText(spaceX.getMissionName());
             launchDateTextView.setText(spaceX.getLaunchDate());
@@ -107,26 +118,17 @@ public class LaunchDetailsFragment extends BaseFragment implements LaunchDetails
             } else {
                 launchPayloadMassTextView.setVisibility(View.GONE);
             }
-            wikiLink = spaceX.getWikipediaLink();
 
-            youtubeId = spaceX.getYoutubeVideoId();
+            String youtubeId = spaceX.getYoutubeVideoId();
             if (youtubeId != null) {
                 String path = Constants.YOUTUBE_IMG_BASE_URL + youtubeId + Constants.YOUTUBE_IMG_END_URL;
                 Picasso.get().load(path).into(launchImageView);
             }
         }
-
-        presenter.takeView(this);
-    }
-
-
-    @Override
-    public void backPressed() {
-        Objects.requireNonNull(getActivity()).onBackPressed();
     }
 
     @Override
-    public void openWiki() {
+    public void openWiki(String wikiLink) {
         if (wikiLink != null) {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(wikiLink));
             startActivity(browserIntent);
@@ -134,29 +136,34 @@ public class LaunchDetailsFragment extends BaseFragment implements LaunchDetails
     }
 
     @Override
-    public void changeLaunchImageVisibility(boolean isVisible) {
-        launchImageView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
-    }
-
-    @Override
-    public void playVideo() {
-        youTubePlayerFragment.initialize(Constants.YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
+    public Observable<Pair<YouTubePlayer, Boolean>> initializeYoutubePlayer() {
+        return Observable.create(emitter -> youTubePlayerFragment.initialize(Constants.YOUTUBE_API_KEY, new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-                if (!b) {
-                    player = youTubePlayer;
-                    changeLaunchImageVisibility(false);
-                    player.loadVideo(youtubeId);
-                    player.setOnFullscreenListener(b1 -> fullScreen = b1);
-                    player.play();
-                }
+                emitter.onNext(new Pair<>(youTubePlayer, b));
             }
 
             @Override
             public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
 
             }
-        });
+        }));
+    }
+
+    @Override
+    public void playVideo(String youtubeId, YouTubePlayer youTubePlayer, boolean wasRestored) {
+        if (!wasRestored) {
+            player = youTubePlayer;
+            launchImageView.setVisibility(View.GONE);
+            player.loadVideo(youtubeId);
+            player.setOnFullscreenListener(b1 -> fullScreen = b1);
+            player.play();
+        }
+    }
+
+    @Override
+    public Observable<Boolean> detectFullscreen() {
+        return Observable.create(emitter -> player.setOnFullscreenListener(emitter::onNext));
     }
 
     @Override

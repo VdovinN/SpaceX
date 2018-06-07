@@ -1,6 +1,10 @@
 package com.vdovin.spacex.screen.detail.structure;
 
+import android.util.Pair;
+
+import com.google.android.youtube.player.YouTubePlayer;
 import com.vdovin.spacex.base.BaseView;
+import com.vdovin.spacex.database.model.SpaceX;
 
 import io.reactivex.Observable;
 
@@ -8,11 +12,15 @@ public interface LaunchDetailsView extends BaseView {
 
     void backPressed();
 
-    void openWiki();
+    void setupView(SpaceX spaceX);
 
-    void changeLaunchImageVisibility(boolean isVisible);
+    void openWiki(String wikiLink);
 
-    void playVideo();
+    Observable<Pair<YouTubePlayer, Boolean>> initializeYoutubePlayer();
+
+    void playVideo(String youtubeId, YouTubePlayer youTubePlayer, boolean wasRestored);
+
+    Observable<Boolean> detectFullscreen();
 
     Observable<Object> launchImageClicked();
 
