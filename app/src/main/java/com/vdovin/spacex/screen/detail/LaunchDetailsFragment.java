@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,21 +19,21 @@ import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.squareup.picasso.Picasso;
 import com.vdovin.spacex.R;
+import com.vdovin.spacex.base.BaseFragment;
 import com.vdovin.spacex.database.model.SpaceX;
 import com.vdovin.spacex.screen.detail.structure.LaunchDetailsPresenter;
 import com.vdovin.spacex.screen.detail.structure.LaunchDetailsView;
 import com.vdovin.spacex.util.Constants;
 
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import dagger.android.support.AndroidSupportInjection;
 import io.reactivex.Observable;
 
-public class LaunchDetailsFragment extends Fragment implements LaunchDetailsView {
+public class LaunchDetailsFragment extends BaseFragment implements LaunchDetailsView {
 
     @Inject
     LaunchDetailsPresenter presenter;
@@ -86,9 +85,7 @@ public class LaunchDetailsFragment extends Fragment implements LaunchDetailsView
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        AndroidSupportInjection.inject(this);
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
 
         youTubePlayerFragment = YouTubePlayerSupportFragment.newInstance();
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
@@ -164,17 +161,17 @@ public class LaunchDetailsFragment extends Fragment implements LaunchDetailsView
 
     @Override
     public Observable<Object> launchImageClicked() {
-        return RxView.clicks(launchImageView);
+        return RxView.clicks(launchImageView).throttleFirst(Constants.TIME_BETWEEN_CLICKS, TimeUnit.MILLISECONDS);
     }
 
     @Override
     public Observable<Object> backButtonClicked() {
-        return RxView.clicks(backButton);
+        return RxView.clicks(backButton).throttleFirst(Constants.TIME_BETWEEN_CLICKS, TimeUnit.MILLISECONDS);
     }
 
     @Override
     public Observable<Object> linkClicked() {
-        return RxView.clicks(launchWikiLinkTextView);
+        return RxView.clicks(launchWikiLinkTextView).throttleFirst(Constants.TIME_BETWEEN_CLICKS, TimeUnit.MILLISECONDS);
     }
 
     public boolean isFullscreen() {

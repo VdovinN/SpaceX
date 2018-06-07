@@ -17,6 +17,7 @@ import com.vdovin.spacex.util.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -85,6 +86,7 @@ public class LaunchesAdapter extends RecyclerView.Adapter<LaunchesAdapter.ViewHo
             String path = Constants.YOUTUBE_IMG_BASE_URL + spaceX.getYoutubeVideoId() + Constants.YOUTUBE_IMG_END_URL;
             Picasso.get().load(path).into(launchImageView);
             RxView.clicks(itemView)
+                    .throttleFirst(Constants.TIME_BETWEEN_CLICKS, TimeUnit.MILLISECONDS)
                     .takeUntil(RxView.detaches(parent))
                     .map(object -> spaceX)
                     .subscribe(itemClicked);

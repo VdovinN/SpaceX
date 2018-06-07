@@ -3,7 +3,6 @@ package com.vdovin.spacex.screen.main;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.vdovin.spacex.R;
+import com.vdovin.spacex.base.BaseFragment;
 import com.vdovin.spacex.database.model.SpaceX;
 import com.vdovin.spacex.screen.detail.LaunchDetailsFragment;
 import com.vdovin.spacex.screen.main.adapter.LaunchesAdapter;
@@ -24,11 +24,9 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import dagger.android.support.AndroidSupportInjection;
 import io.reactivex.Observable;
 
-public class LaunchesFragment extends Fragment implements LaunchesView {
+public class LaunchesFragment extends BaseFragment implements LaunchesView {
 
     @Inject
     LaunchesPresenter presenter;
@@ -50,9 +48,7 @@ public class LaunchesFragment extends Fragment implements LaunchesView {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        AndroidSupportInjection.inject(this);
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
 
         launchesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         launchesAdapter = new LaunchesAdapter(getContext(), new ArrayList<>());

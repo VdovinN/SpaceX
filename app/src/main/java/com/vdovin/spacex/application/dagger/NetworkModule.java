@@ -1,6 +1,9 @@
 package com.vdovin.spacex.application.dagger;
 
+import android.content.Context;
+
 import com.vdovin.spacex.api.SpaceApi;
+import com.vdovin.spacex.util.ConnectivityInfo;
 
 import dagger.Module;
 import dagger.Provides;
@@ -37,6 +40,11 @@ public class NetworkModule {
                 .client(okHttpClient)
                 .build()
                 .create(SpaceApi.class);
+    }
+
+    @Provides
+    ConnectivityInfo provideConnectivityInfo(Context context) {
+        return new ConnectivityInfo(context);
     }
 
 }
