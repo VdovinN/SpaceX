@@ -61,8 +61,6 @@ public class LaunchDetailsFragment extends BaseFragment implements LaunchDetails
 
     private YouTubePlayer player;
 
-    private boolean fullScreen;
-
     public static LaunchDetailsFragment newInstance(SpaceX spaceX) {
 
         Bundle args = new Bundle();
@@ -156,7 +154,6 @@ public class LaunchDetailsFragment extends BaseFragment implements LaunchDetails
             player = youTubePlayer;
             launchImageView.setVisibility(View.GONE);
             player.loadVideo(youtubeId);
-            player.setOnFullscreenListener(b1 -> fullScreen = b1);
             player.play();
         }
     }
@@ -182,7 +179,7 @@ public class LaunchDetailsFragment extends BaseFragment implements LaunchDetails
     }
 
     public boolean isFullscreen() {
-        return presenter.fullScreen;//Fix it
+        return presenter.isFullScreen();
     }
 
     public void exitFullScreen() {

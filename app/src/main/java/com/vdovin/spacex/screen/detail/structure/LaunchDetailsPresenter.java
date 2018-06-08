@@ -9,9 +9,13 @@ public class LaunchDetailsPresenter extends BasePresenter<LaunchDetailsView> {
 
     private SpaceX spaceX;
 
-    public boolean fullScreen;//Fix it
+    private boolean fullScreen;
 
     public LaunchDetailsPresenter() {
+    }
+
+    public boolean isFullScreen() {
+        return fullScreen;
     }
 
     public void setSpaceX(SpaceX spaceX) {
