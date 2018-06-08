@@ -182,7 +182,7 @@ public class LaunchDetailsFragment extends BaseFragment implements LaunchDetails
     }
 
     public boolean isFullscreen() {
-        return fullScreen;
+        return presenter.fullScreen;//Fix it
     }
 
     public void exitFullScreen() {

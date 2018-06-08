@@ -9,7 +9,7 @@ public class LaunchDetailsPresenter extends BasePresenter<LaunchDetailsView> {
 
     private SpaceX spaceX;
 
-    private boolean fullScreen;
+    public boolean fullScreen;//Fix it
 
     public LaunchDetailsPresenter() {
     }
@@ -25,7 +25,6 @@ public class LaunchDetailsPresenter extends BasePresenter<LaunchDetailsView> {
         disposables.add(back());
         disposables.add(openLink());
         disposables.add(play());
-        disposables.add(fullScreen());
     }
 
     private Disposable back() {
@@ -40,10 +39,11 @@ public class LaunchDetailsPresenter extends BasePresenter<LaunchDetailsView> {
         return getView().launchImageClicked().flatMap(o -> getView().initializeYoutubePlayer()).subscribe(pair -> {
             fullScreen = pair.second;
             getView().playVideo(spaceX.getYoutubeVideoId(), pair.first, pair.second);
+            disposables.add(detectFullScreen());
         });
     }
 
-    private Disposable fullScreen() {
+    private Disposable detectFullScreen() {
         return getView().detectFullscreen().subscribe(isFullscreen -> fullScreen = isFullscreen);
     }
 
