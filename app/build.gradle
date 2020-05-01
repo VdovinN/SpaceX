@@ -33,6 +33,9 @@ dependencies {
     implementation "org.koin:koin-android:$koin_version"
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    //Room
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version" // For Kotlin use kapt instead of annotationProcessor
 
 }
 repositories {
