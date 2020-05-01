@@ -35,7 +35,7 @@ public class OrbitParams {
     private Double periodMin;
     @SerializedName("lifespan_years")
     @Expose
-    private Integer lifespanYears;
+    private Double lifespanYears;
 
     public String getReferenceSystem() {
         return referenceSystem;
@@ -109,11 +109,11 @@ public class OrbitParams {
         this.periodMin = periodMin;
     }
 
-    public Integer getLifespanYears() {
+    public Double getLifespanYears() {
         return lifespanYears;
     }
 
-    public void setLifespanYears(Integer lifespanYears) {
+    public void setLifespanYears(Double lifespanYears) {
         this.lifespanYears = lifespanYears;
     }
 
