@@ -31,6 +31,9 @@ dependencies {
 
     // Koin
     implementation "org.koin:koin-android:$koin_version"
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+
 }
 repositories {
     mavenCentral()
