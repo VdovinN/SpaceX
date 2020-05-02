@@ -1,13 +1,15 @@
 package com.vdovin.spacex.base
 
+import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
-abstract class BaseActivity<P : BasePresenter<*>> : AppCompatActivity() {
-    abstract val presenter : P
+abstract class BaseActivity<V : BaseView> : AppCompatActivity(), BaseView {
+    abstract val view: V
+    abstract val presenter: BasePresenter<V>
 
-    override fun onStart() {
-        super.onStart()
-        presenter.start()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        presenter.initView(view)
     }
 
     override fun onStop() {

@@ -1,7 +1,9 @@
 package com.vdovin.spacex.application
 
 import android.app.Application
+import com.vdovin.spacex.di.databaseModule
 import com.vdovin.spacex.di.networkModule
+import com.vdovin.spacex.di.screenModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
 import org.koin.android.ext.koin.androidLogger
@@ -14,7 +16,7 @@ class SpaceApplication: Application() {
             androidLogger()
             androidContext(this@SpaceApplication)
             androidFileProperties()
-            modules(networkModule)
+            modules(networkModule, databaseModule, screenModule)
         }
     }
 }
