@@ -1,13 +1,16 @@
 package com.vdovin.spacex.base
 
+import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 
-abstract class BaseFragment<P : BasePresenter<*>> : Fragment() {
-    abstract val presenter : P
+abstract class BaseFragment<V : BaseView> : Fragment(), BaseView {
+    abstract val view : V
+    lateinit var presenter : BasePresenter<V>
 
-    override fun onStart() {
-        super.onStart()
-        presenter.start()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        presenter.initView(this.view)
     }
 
     override fun onStop() {
