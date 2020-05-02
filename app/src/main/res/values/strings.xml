@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">SpaceX</string>
+    <string name="kg">kg</string>
+    <string name="wikipedia">wikipedia</string>
+    <string name="rocket_name">Rocket name</string>
+    <string name="payload_mass">Payload mass</string>
+    <string name="error_message">An error occurred.%1$s</string>
 </resources>
