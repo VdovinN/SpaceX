@@ -4,12 +4,18 @@ import androidx.room.Room
 import com.vdovin.spacex.api.SpaceApi
 import com.vdovin.spacex.base.BasePresenter
 import com.vdovin.spacex.database.AppDatabase
+import com.vdovin.spacex.main.MainActivity
 import com.vdovin.spacex.main.MainPresenter
 import com.vdovin.spacex.main.MainView
+import com.vdovin.spacex.screen.main.LaunchesFragment
+import com.vdovin.spacex.screen.main.LaunchesPresenter
+import com.vdovin.spacex.screen.main.LaunchesView
 import com.vdovin.spacex.util.ConnectionHelper
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
+import org.koin.core.qualifier.QualifierValue
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -18,7 +24,8 @@ private const val BASE_URL = "https://api.spacexdata.com/"
 private const val DB_NAME = "space_x_db.db"
 
 val networkModule = module {
-    factory { HttpLoggingInterceptor(HttpLoggingInterceptor.Logger.DEFAULT).apply { level = HttpLoggingInterceptor.Level.BODY } }
+    factory { HttpLoggingInterceptor(HttpLoggingInterceptor.Logger.DEFAULT)
+            .apply { level = HttpLoggingInterceptor.Level.BODY } }
     factory { provideHttpClient(get()) }
     factory { provideSpaceApi(get()) }
     single { provideRetrofit(get()) }
@@ -31,10 +38,11 @@ val databaseModule = module {
 }
 
 val screenModule = module {
-    factory { MainPresenter(get(), get(), get()) as BasePresenter<MainView> }
+    factory<BasePresenter<MainView>>(named(MainActivity.TAG)) { MainPresenter(get(), get(), get()) }
+    factory<BasePresenter<LaunchesView>>(named(LaunchesFragment.TAG)) { LaunchesPresenter(get()) }
 }
 
-fun provideRetrofit(okHttpClient: OkHttpClient) = Retrofit.Builder()
+fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
@@ -44,4 +52,4 @@ fun provideHttpClient(loggingInterceptor: HttpLoggingInterceptor) = OkHttpClient
         .addInterceptor(loggingInterceptor)
         .build()
 
-fun provideSpaceApi(retrofit: Retrofit) = retrofit.create(SpaceApi::class.java)
+fun provideSpaceApi(retrofit: Retrofit): SpaceApi = retrofit.create(SpaceApi::class.java)

@@ -6,15 +6,15 @@ import androidx.fragment.app.Fragment
 
 abstract class BaseFragment<V : BaseView> : Fragment(), BaseView {
     abstract val view : V
-    lateinit var presenter : BasePresenter<V>
+    abstract val presenter : BasePresenter<V>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.initView(this.view)
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroyView() {
+        super.onDestroyView()
         presenter.stop()
     }
 }
