@@ -1,5 +1,7 @@
 package com.vdovin.spacex.screen.details
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -103,6 +105,15 @@ class LaunchDetailsFragment : BaseFragment<LaunchDetailsView>(), LaunchDetailsVi
                 }
             })
         }
+    }
+
+    override fun linkClicked(linkListener: () -> Unit) {
+        launch_wiki_link_text_view.setOnClickListener { linkListener.invoke() }
+    }
+
+    override fun openWiki(wikiLink: String) {
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(wikiLink))
+        startActivity(browserIntent)
     }
 
     override fun showError(message: String?) {
