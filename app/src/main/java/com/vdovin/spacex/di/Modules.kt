@@ -7,6 +7,9 @@ import com.vdovin.spacex.database.AppDatabase
 import com.vdovin.spacex.main.MainActivity
 import com.vdovin.spacex.main.MainPresenter
 import com.vdovin.spacex.main.MainView
+import com.vdovin.spacex.screen.details.LaunchDetailsFragment
+import com.vdovin.spacex.screen.details.LaunchDetailsPresenter
+import com.vdovin.spacex.screen.details.LaunchDetailsView
 import com.vdovin.spacex.screen.main.LaunchesFragment
 import com.vdovin.spacex.screen.main.LaunchesPresenter
 import com.vdovin.spacex.screen.main.LaunchesView
@@ -14,7 +17,6 @@ import com.vdovin.spacex.util.ConnectionHelper
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
-import org.koin.core.qualifier.QualifierValue
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -40,6 +42,7 @@ val databaseModule = module {
 val screenModule = module {
     factory<BasePresenter<MainView>>(named(MainActivity.TAG)) { MainPresenter(get(), get(), get()) }
     factory<BasePresenter<LaunchesView>>(named(LaunchesFragment.TAG)) { LaunchesPresenter(get()) }
+    factory<BasePresenter<LaunchDetailsView>>(named(LaunchDetailsFragment.TAG)) { LaunchDetailsPresenter(get()) }
 }
 
 fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()

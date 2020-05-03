@@ -6,6 +6,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.snackbar.Snackbar
@@ -47,18 +48,28 @@ fun Space.convertToDatabaseModel() = SpaceX(
 )
 
 inline fun FragmentManager.transaction(func: FragmentTransaction.() -> FragmentTransaction) {
-    beginTransaction().func().commit()
+    beginTransaction().func().addToBackStack(null).commit()
 }
 
-fun AppCompatActivity.add(fragment: Fragment, container: Int) {
+fun FragmentActivity.add(fragment: Fragment, container: Int) {
     supportFragmentManager.transaction { add(container, fragment) }
 }
 
-fun AppCompatActivity.replace(fragment: Fragment, container: Int) {
-    supportFragmentManager.transaction { replace(container, fragment) }
+fun FragmentActivity.add(fragment: Fragment, container: Int, tag: String, animated: Boolean = true) {
+    supportFragmentManager.transaction {
+        when {
+            animated -> setCustomAnimations(
+                    R.anim.enter_from_right,
+                    R.anim.exit_to_left,
+                    R.anim.enter_from_left,
+                    R.anim.exit_to_right)
+                    .add(container, fragment, tag)
+            else -> add(container, fragment, tag)
+        }
+    }
 }
 
-fun View.showSnackBar(text: String){
+fun View.showSnackBar(text: String) {
     Snackbar.make(this, text, Snackbar.LENGTH_LONG).show()
 }
 

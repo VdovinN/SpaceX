@@ -57,6 +57,8 @@ dependencies {
     implementation "com.squareup.picasso:picasso:$picasso_version"
     //RoundImageView
     implementation "com.makeramen:roundedimageview:$round_image_version"
+    //YouTube
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
 }
 repositories {
     mavenCentral()

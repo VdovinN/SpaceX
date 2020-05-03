@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "space_x")
 class SpaceX(
     @PrimaryKey
-    val flightNumber: Long?,
+    val flightNumber: Long,
     val missionName: String?,
     val details: String?,
     val launchDate: String?,
