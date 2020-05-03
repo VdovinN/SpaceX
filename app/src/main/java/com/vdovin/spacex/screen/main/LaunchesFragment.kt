@@ -9,6 +9,8 @@ import com.vdovin.spacex.R
 import com.vdovin.spacex.base.BaseFragment
 import com.vdovin.spacex.base.BasePresenter
 import com.vdovin.spacex.database.model.SpaceX
+import com.vdovin.spacex.screen.details.LaunchDetailsFragment
+import com.vdovin.spacex.util.add
 import com.vdovin.spacex.util.showSnackBar
 import kotlinx.android.synthetic.main.launches_layout.*
 import org.koin.android.ext.android.inject
@@ -38,7 +40,7 @@ class LaunchesFragment : BaseFragment<LaunchesView>(), LaunchesView {
     }
 
     override fun openDetails(spaceX: SpaceX) {
-        TODO("Not yet implemented")
+        activity?.add(LaunchDetailsFragment.newInstance(spaceX.flightNumber), R.id.main_container, LaunchDetailsFragment.TAG)
     }
 
     override fun launchClicked(launchClickListener: (SpaceX) -> Unit) {

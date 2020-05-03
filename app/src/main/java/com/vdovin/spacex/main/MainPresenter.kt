@@ -22,7 +22,6 @@ class MainPresenter(
                 withContext(backgroundContext){
                     val spaces = api.allPastLaunches()
                     dao.insert(spaces.map { space -> space.convertToDatabaseModel() })
-                    println(dao.allLaunches)
                 }
             }
             view.showLaunches()

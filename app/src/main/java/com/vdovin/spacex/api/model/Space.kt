@@ -3,7 +3,7 @@ package com.vdovin.spacex.api.model
 import com.google.gson.annotations.SerializedName
 
 class Space (
-    @SerializedName("flight_number") val flightNumber: Long?,
+    @SerializedName("flight_number") val flightNumber: Long,
     @SerializedName("mission_name") val missionName: String?,
     @SerializedName("launch_year") val launchYear: String?,
     @SerializedName("launch_date_unix") val launchDateUnix: Long?,

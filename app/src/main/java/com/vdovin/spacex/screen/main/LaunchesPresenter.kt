@@ -7,7 +7,7 @@ import kotlinx.coroutines.withContext
 class LaunchesPresenter(private val dao: SpaceXDao) : BasePresenter<LaunchesView>() {
     override fun start() {
         launch {
-            val launches = withContext(backgroundContext) { dao.allLaunches }
+            val launches = withContext(backgroundContext) { dao.getAllLaunches() }
             view.displayLaunches(launches)
             view.launchClicked{ spaceX -> view.openDetails(spaceX) }
         }
