@@ -11,6 +11,8 @@ interface LaunchDetailsView : BaseView {
 
     fun launchImageClicked(launchImageListener: (YouTubePlayer, Boolean) -> Unit)
 
+    fun linkClicked(linkListener: () -> Unit)
+
     fun setTitle(title : String)
 
     fun setDate(date : String)
@@ -26,4 +28,7 @@ interface LaunchDetailsView : BaseView {
     fun setLaunchImageVisibility(visibility: Int)
 
     fun setImage(imgSource: String)
+
+    fun openWiki(wikiLink: String)
+
 }

@@ -43,6 +43,7 @@ class LaunchDetailsPresenter(private val dao: SpaceXDao) : BasePresenter<LaunchD
                 }
 
                 view.backButtonClicked { view.backPressed() }
+                space.wikipediaLink?.let { link -> view.linkClicked {  view.openWiki(link) } }
             }
         }
     }
