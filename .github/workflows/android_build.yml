@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: Cloning repo
-      - uses: actions/checkout@v1
+        uses: actions/checkout@v1
 
       - name: Set Up JDK
         uses: actions/setup-java@v1
